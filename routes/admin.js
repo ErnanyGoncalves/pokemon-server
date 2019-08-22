@@ -4,10 +4,10 @@ const adminController = require("../controllers/admin");
 
 const router = express.Router();
 
-router.get('/add/pokemon',(req,res,next)=>{
-    console.log('Teste GET!');
-});
 
-router.post('/add/pokemon', adminController.postAddPokemon);  //adminController.postAddPokemon está com o req,res,next que é visto no GET
+router.post('/add/pokemon', adminController.postAddPokemon);
+
+// Criar rota post /edit/pokemon/:number 
+// Criar rota post /delete/pokemon/:number 
 
 module.exports = router;

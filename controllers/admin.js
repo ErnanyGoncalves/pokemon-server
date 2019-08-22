@@ -11,6 +11,15 @@ exports.postAddPokemon = (req, res, next) => {
 
     const newPokemon = new Pokemon(number, name, imageURL, regionName, type, isLegendary, evolution);
     console.log(newPokemon);
-    newPokemon.save();
+    newPokemon.add()
+        .then(result => {
+            console.log(result.ops[0].name + " added!");
+        })
+        .catch(err => {
+            console.log(err);
+        });
     res.send('OK');
 }
+
+// Criar postEditPokemon
+// Criar postDeletePokemon

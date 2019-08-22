@@ -1,4 +1,4 @@
-const getDb = require('../util/database').getDB;
+const getDB = require('../util/database').getDB;
 
 class Pokemon {
     constructor(number, name, imageURL, regionName, type, isLegendary, evolution) {
@@ -10,23 +10,45 @@ class Pokemon {
         this.isLegendary = isLegendary;
         this.evolution = evolution;
     }
-
-    save() { // Inserção somente ( por atualização dps )
-        const db = getDb();
-        db.collection("pokemons").insertOne(this)
+    
+    add() {
+        const db = getDB();
+        return db.collection("pokemons").insertOne(this)
             .then(result => {
-                console.log('Pokémon Added!');
+                console.log('Pokémon added!');
+                return result;
             })
             .catch(err => {
                 console.log(err)
             });
     }
 
+    edit(pokemonNumber) {
+        //TODO
+    }
+
+    delete(pokemonNumber) {
+        //TODO
+    }
+
     static getAll() {
-        const db = getDb();
-        db.collection("pokemons").find().toArray()
+        const db = getDB();
+        return db.collection("pokemons").find().toArray()
             .then(result => {
-                console.log(result);
+                // console.log(result);
+                return result;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    static getOne(pokemonNumber) {
+        const db = getDB();
+        return db.collection("pokemons").findOne({ "_id": parseInt(pokemonNumber) })
+            .then(result => {
+                // console.log(result);
+                return result;
             })
             .catch(err => {
                 console.log(err);

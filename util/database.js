@@ -3,20 +3,20 @@ const MongoClient = mongodb.MongoClient;
 
 const url = "mongodb+srv://ernany:senha@pokemon-6kngw.mongodb.net/pokemonBD?retryWrites=true&w=majority";
 
-const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
-
 let db;
 
-const mongodbConnected = () => {
-    client.connect()
-        .then(result => {
-            db = client.db();
-            console.log('MongoDB Connected!');
-        })
-        .catch(err => {
-            console.log(err);
-            throw err;
-        });
+const mongodbConnected = callback => {
+
+    MongoClient.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
+    .then(client => {
+        console.log('MongoDB Connected!');
+        db = client.db();
+        callback();
+    })
+    .catch(err => {
+        console.log(err);
+        throw err;
+    });
 };
 
 const getDB = () => {
