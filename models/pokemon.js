@@ -2,7 +2,7 @@ const getDB = require('../util/database').getDB;
 
 class Pokemon {
     constructor(number, name, imageURL, regionName, type, isLegendary, evolution) {
-        this._id = number;
+        this.number = number;
         this.name = name;
         this.imageURL = imageURL;
         this.regionName = regionName;
@@ -10,7 +10,7 @@ class Pokemon {
         this.isLegendary = isLegendary;
         this.evolution = evolution;
     }
-    
+
     add() {
         const db = getDB();
         return db.collection("pokemons").insertOne(this)
@@ -24,11 +24,27 @@ class Pokemon {
     }
 
     edit(pokemonNumber) {
-        //TODO
+        const db = getDB();
+        return db.collection("pokemons").findOneAndUpdate({ number: parseInt(pokemonNumber) }, { $set: this }) // this se refere a classe Pokemon
+            .then(result => {
+                console.log("Pokémon updated!");
+                return result;
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
-    delete(pokemonNumber) {
-        //TODO
+    static remove(pokemonNumber) {
+        const db = getDB();
+        return db.collection("pokemons").findOneAndDelete({ number: parseInt(pokemonNumber) })
+            .then(result => {
+                console.log(result.value._id + " - " + result.value.name + " removed!");
+                return result;
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     static getAll() {

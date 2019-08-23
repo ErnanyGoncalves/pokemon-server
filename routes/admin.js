@@ -6,8 +6,10 @@ const router = express.Router();
 
 
 router.post('/add/pokemon', adminController.postAddPokemon);
+router.post('/remove/pokemon/:number', adminController.postRemovePokemon);
+router.get('/edit/pokemon/:number', adminController.getEditPokemon);
+router.post('/edit/pokemon/:number', adminController.postEditPokemon);
 
-// Criar rota post /edit/pokemon/:number 
-// Criar rota post /delete/pokemon/:number 
+
 
 module.exports = router;
