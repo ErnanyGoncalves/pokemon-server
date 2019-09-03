@@ -5,7 +5,7 @@ exports.getPokemons = (req, res, next) => {
     Pokemon.getAll()
         .then(result => {
             console.log(result);
-            res.json(result);
+            res.send(result);
         })
         .catch(err => {
             console.log(err);
@@ -17,7 +17,7 @@ exports.getPokemon = (req,res,next) =>{
     Pokemon.getOne(req.params.number)
     .then(result=>{
         console.log(result);
-        res.json(result);
+        res.send(result);
     })
     .catch(err=>{
         console.log(err);

@@ -61,7 +61,7 @@ class Pokemon {
 
     static getOne(pokemonNumber) {
         const db = getDB();
-        return db.collection("pokemons").findOne({ "_id": parseInt(pokemonNumber) })
+        return db.collection("pokemons").findOne({ "number": parseInt(pokemonNumber) })
             .then(result => {
                 // console.log(result);
                 return result;
